@@ -1,6 +1,6 @@
 # popcorntv
 
-Popcorn Time clone
+Popcorn Time Flutter clone
 
 ## Getting Started
 
