@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:popcorntv/Screens/moviehompage.dart';
+import 'package:popcorntv/Screens/serieshomepage.dart';
 
 class Sidemenu extends StatelessWidget {
   @override
@@ -19,12 +21,8 @@ class Sidemenu extends StatelessWidget {
                 color: Color(0x303f9fff),
               ),
               child: UserAccountsDrawerHeader(
-                accountName: Text(""),
-                accountEmail: Text(""),
-                currentAccountPicture: CircleAvatar(
-                  child: FlutterLogo(
-                    size: 42,
-                  ),
+                currentAccountPicture: FlutterLogo(
+                  size: 42,
                 ),
               ),
             ),
@@ -34,22 +32,43 @@ class Sidemenu extends StatelessWidget {
                 color: Colors.white,
               ),
               title: Text('Movies'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => movieHomepage(
+                      title: 'Movies',
+                    ),
+                  ),
+                );
+              },
             ),
             ListTile(
               leading: Icon(Icons.laptop, color: Colors.white),
               title: Text('Series'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        seriesHomepage(title: 'Series'),
+                  ),
+                );
+              },
             ),
             ListTile(
               leading: Icon(Icons.border_all, color: Colors.white),
               title: Text('Anime'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
             ListTile(
               leading: Icon(Icons.settings, color: Colors.white),
               title: Text('Preferences'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
           ],
         ),

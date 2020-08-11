@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:popcorntv/Models/moviecatalog.dart';
+import 'package:popcorntv/Models/tvcatalog.dart';
 import 'package:popcorntv/utilites/urlconstants.dart';
 import 'package:popcorntv/utilites/webservice.dart';
 import 'package:popcorntv/widgets/Thumbdisplay.dart';
 
-class Fscreen extends StatefulWidget {
+class seriestab extends StatefulWidget {
   final String sortvalue;
-  Fscreen({this.sortvalue});
+  seriestab({this.sortvalue});
   @override
-  _FscreenState createState() => _FscreenState();
+  _seriestabState createState() => _seriestabState();
 }
 
-class _FscreenState extends State<Fscreen> {
+class _seriestabState extends State<seriestab> {
   int movielistlength;
   int count = 1;
   int counter;
   bool _spinner = false;
   ScrollController _scrollController = ScrollController();
-  List<Moviecatalog> movieslist2 = [];
+  List<Tvcatalog> serieslist2 = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -41,7 +41,7 @@ class _FscreenState extends State<Fscreen> {
   }
 
   Future<void> getListlength() async {
-    NetworkHelper networkHelper = NetworkHelper(movielist);
+    NetworkHelper networkHelper = NetworkHelper(tvlist);
     var d = await networkHelper.getData() as List;
     counter = d.length;
 
@@ -51,8 +51,8 @@ class _FscreenState extends State<Fscreen> {
   }
 
   Future<void> getData(int number) async {
-    List<Moviecatalog> movieslist = [];
-    List<Moviecatalog> movieslist1 = movieslist2;
+    List<Tvcatalog> serieslist = [];
+    List<Tvcatalog> serieslist1 = serieslist2;
 
     if (number == 2) {
       if (count != counter) {
@@ -60,20 +60,19 @@ class _FscreenState extends State<Fscreen> {
       }
     }
     String url =
-        movieurl + count.toString() + '?order=-1&sort=' + widget.sortvalue;
+        tvurl + count.toString() + '?order=-1&sort=' + widget.sortvalue;
     NetworkHelper networkHelper = NetworkHelper(url);
     var response = await networkHelper.getData() as List;
 
-    movieslist = response
-        .map<Moviecatalog>((json) => Moviecatalog.fromJson(json))
-        .toList();
+    serieslist =
+        response.map<Tvcatalog>((json) => Tvcatalog.fromJson(json)).toList();
 
-    if (movieslist1.length > 0 && number == 2) {
-      movieslist1 = [...movieslist1, ...movieslist];
+    if (serieslist1.length > 0 && number == 2) {
+      serieslist1 = [...serieslist1, ...serieslist];
     } else {
-      movieslist1 = movieslist;
+      serieslist1 = serieslist;
     }
-    movieslist2 = movieslist1;
+    serieslist2 = serieslist1;
     setState(() {});
   }
 
@@ -99,15 +98,15 @@ class _FscreenState extends State<Fscreen> {
             controller: _scrollController,
             childAspectRatio: 0.65,
             crossAxisCount: 2,
-            children: List.generate(movieslist2.length, (index) {
+            children: List.generate(serieslist2.length, (index) {
               // print(movielistlength);
-              Moviecatalog moviecatalog = movieslist2[index];
+              Tvcatalog tvcatalog = serieslist2[index];
               return Thumbdisplay(
-                imdbid: moviecatalog.imdbId,
-                title: moviecatalog.title,
-                year: moviecatalog.year,
-                image_url: moviecatalog.images.poster,
-              );
+                  imdbid: tvcatalog.imdbId,
+                  title: tvcatalog.title,
+                  year: tvcatalog.year,
+                  image_url: tvcatalog.images.poster ?? tvcatalog.images.banner,
+                  isShow: true);
             }),
           ),
         ));

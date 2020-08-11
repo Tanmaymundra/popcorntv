@@ -1,30 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:palette_generator/palette_generator.dart';
-import 'package:popcorntv/Screens/movietab.dart';
+import 'package:popcorntv/Screens/movieinfotab.dart';
+import 'package:popcorntv/Screens/seriesinfo.dart';
 
 class Thumbdisplay extends StatelessWidget {
   Thumbdisplay(
-      {this.index, this.image_url, this.title, this.year, this.imdbid});
+      {this.index,
+      this.image_url,
+      this.title,
+      this.year,
+      this.imdbid,
+      this.isShow});
 
   final String year;
   final String imdbid;
   final String title;
   final String image_url;
   final int index;
+  final bool isShow;
 
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => movietab(
-              imdbid: imdbid,
-            ),
-          ),
-        );
+        if (isShow) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => seriesinfo(imdbid: imdbid)));
+        } else {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => movieinfotab(imdbid: imdbid)));
+        }
       },
       child: Stack(
         children: <Widget>[

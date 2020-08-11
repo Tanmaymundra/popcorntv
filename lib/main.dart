@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_torrent_streamer/flutter_torrent_streamer.dart';
-import 'package:popcorntv/Screens/homepage.dart';
+import 'package:popcorntv/Screens/moviehompage.dart';
 
 import 'package:popcorntv/widgets/sidemenu.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await TorrentStreamer.init();
+  //WidgetsFlutterBinding.ensureInitialized();
+  //await TorrentStreamer.init();
   runApp(MyApp());
 }
 
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         iconTheme: Theme.of(context).iconTheme.copyWith(color: Colors.white),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Homepage(
+      home: movieHomepage(
         title: 'Movies',
       ),
     );

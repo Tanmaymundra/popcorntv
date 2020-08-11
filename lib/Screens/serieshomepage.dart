@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:popcorntv/Screens/Fscreen.dart';
-import 'package:popcorntv/Screens/grid.dart';
-import 'package:popcorntv/utilites/torrent.dart';
+import 'package:popcorntv/Screens/movietab.dart';
+import 'package:popcorntv/Screens/genres.dart';
+import 'package:popcorntv/Screens/seriestab.dart';
 import 'package:popcorntv/widgets/sidemenu.dart';
 
-class Homepage extends StatefulWidget {
+class seriesHomepage extends StatefulWidget {
   final String title;
-  Homepage({this.title});
+  seriesHomepage({this.title});
   @override
-  _HomepageState createState() => _HomepageState();
+  _seriesHomepageState createState() => _seriesHomepageState();
 }
 
-class _HomepageState extends State<Homepage>
+class _seriesHomepageState extends State<seriesHomepage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   @override
@@ -29,7 +29,7 @@ class _HomepageState extends State<Homepage>
   }
 
   List<Tab> tablist = [
-    Tab(text: "GENRES"),
+    //Tab(text: "GENRES"),
     Tab(text: "TRENDING"),
     Tab(text: "POPULAR"),
     Tab(text: "TOP RATED"),
@@ -70,15 +70,13 @@ class _HomepageState extends State<Homepage>
           body: TabBarView(
             controller: _tabController,
             children: <Widget>[
-              Fscreen(
-                sortvalue: 'updated',
-              ),
-              Fscreen(sortvalue: 'trending'),
-              Fscreen(sortvalue: ''),
-              Fscreen(sortvalue: 'rating'),
-              Fscreen(sortvalue: 'released'),
-              Fscreen(sortvalue: 'year'),
-              Fscreen(sortvalue: 'name'),
+              //genrelist(),
+              seriestab(sortvalue: 'trending'),
+              seriestab(sortvalue: ''),
+              seriestab(sortvalue: 'rating'),
+              seriestab(sortvalue: 'released'),
+              seriestab(sortvalue: 'year'),
+              seriestab(sortvalue: 'name'),
 
               //          MyApp(),
             ],
