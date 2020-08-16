@@ -107,6 +107,7 @@ class _movietabState extends State<movietab> {
                 title: moviecatalog.title,
                 year: moviecatalog.year,
                 image_url: moviecatalog.images.poster,
+                isShow: false,
               );
             }),
           ),
